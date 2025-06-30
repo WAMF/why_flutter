@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'models/slide_data.dart';
 import 'widgets/slideshow_screen.dart';
 
 void main() {

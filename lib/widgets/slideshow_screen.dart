@@ -162,8 +162,6 @@ class SlideBuilder {
         return InteractiveSlide(slide: slide, animationController: animationController);
       case SlideType.conclusion:
         return ConclusionSlide(slide: slide, animationController: animationController);
-      default:
-        return BasicSlide(slide: slide, animationController: animationController);
     }
   }
 }
