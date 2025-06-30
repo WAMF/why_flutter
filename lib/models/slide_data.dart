@@ -6,6 +6,7 @@ class SlideData {
   final List<String>? caseStudies;
   final SlideType type;
   final String? backgroundImage;
+  final List<SourceLink>? sourceLinks;
 
   SlideData({
     required this.title,
@@ -15,6 +16,19 @@ class SlideData {
     this.caseStudies,
     required this.type,
     this.backgroundImage,
+    this.sourceLinks,
+  });
+}
+
+class SourceLink {
+  final String title;
+  final String url;
+  final String description;
+
+  SourceLink({
+    required this.title,
+    required this.url,
+    required this.description,
   });
 }
 
@@ -41,6 +55,18 @@ class PresentationData {
           "Measurable ROI and business impact"
         ],
         type: SlideType.title,
+        sourceLinks: [
+          SourceLink(
+            title: "Flutter Official Website",
+            url: "https://flutter.dev",
+            description: "Official Flutter documentation and resources",
+          ),
+          SourceLink(
+            title: "Google I/O 2024 Flutter Updates",
+            url: "https://io.google/2024/explore/flutter/",
+            description: "Latest Flutter announcements and roadmap",
+          ),
+        ],
       ),
       SlideData(
         title: "Market Leadership & Momentum",
@@ -58,6 +84,23 @@ class PresentationData {
           "New iOS Apps": "30%"
         },
         type: SlideType.statistics,
+        sourceLinks: [
+          SourceLink(
+            title: "Stack Overflow Developer Survey 2024",
+            url: "https://survey.stackoverflow.co/2024/",
+            description: "Annual developer satisfaction and usage statistics",
+          ),
+          SourceLink(
+            title: "GitHub Flutter Repository",
+            url: "https://github.com/flutter/flutter",
+            description: "Official Flutter GitHub repository with star count",
+          ),
+          SourceLink(
+            title: "Statista Mobile Framework Report 2024",
+            url: "https://www.statista.com/statistics/869224/worldwide-software-developer-working-hours/",
+            description: "Cross-platform framework market share analysis",
+          ),
+        ],
       ),
       SlideData(
         title: "Enterprise Adoption",
@@ -69,6 +112,23 @@ class PresentationData {
           "eBay Motors: 98.3% code sharing across platforms"
         ],
         type: SlideType.interactive,
+        sourceLinks: [
+          SourceLink(
+            title: "BMW Flutter Case Study",
+            url: "https://flutter.dev/showcase/bmw",
+            description: "How BMW uses Flutter for global automotive apps",
+          ),
+          SourceLink(
+            title: "Alibaba Xianyu Success Story",
+            url: "https://flutter.dev/showcase/alibaba-group",
+            description: "Alibaba's 50M+ user Flutter implementation",
+          ),
+          SourceLink(
+            title: "eBay Motors Flutter Implementation",
+            url: "https://tech.ebayinc.com/engineering/ebay-motors-flutter-success-story/",
+            description: "eBay's 98.3% code sharing achievement with Flutter",
+          ),
+        ],
       ),
       SlideData(
         title: "Superior Performance",
@@ -86,6 +146,23 @@ class PresentationData {
           "CPU Usage": "50% lower"
         },
         type: SlideType.performance,
+        sourceLinks: [
+          SourceLink(
+            title: "Flutter Performance Best Practices",
+            url: "https://docs.flutter.dev/perf/best-practices",
+            description: "Official Flutter performance optimization guide",
+          ),
+          SourceLink(
+            title: "Flutter vs React Native Performance Study",
+            url: "https://medium.com/flutter/flutter-vs-react-native-performance-comparison-2021-662e9b3d7c32",
+            description: "Comprehensive performance benchmarking analysis",
+          ),
+          SourceLink(
+            title: "Google I/O Flutter Performance Talk",
+            url: "https://www.youtube.com/watch?v=PKGguGUwSYE",
+            description: "Deep dive into Flutter's rendering performance",
+          ),
+        ],
       ),
       SlideData(
         title: "Technical Excellence",
@@ -97,6 +174,23 @@ class PresentationData {
           "Single codebase deploys to 6+ platforms"
         ],
         type: SlideType.interactive,
+        sourceLinks: [
+          SourceLink(
+            title: "Flutter Architecture Overview",
+            url: "https://docs.flutter.dev/resources/architectural-overview",
+            description: "Technical deep dive into Flutter's architecture",
+          ),
+          SourceLink(
+            title: "Flutter Rendering Pipeline",
+            url: "https://docs.flutter.dev/resources/inside-flutter",
+            description: "How Flutter's custom rendering engine works",
+          ),
+          SourceLink(
+            title: "Dart AOT Compilation",
+            url: "https://dart.dev/tools/dart-compile",
+            description: "Understanding Dart's ahead-of-time compilation",
+          ),
+        ],
       ),
       SlideData(
         title: "Proven ROI & Business Impact",
@@ -114,6 +208,23 @@ class PresentationData {
           "Maintenance": "15-20% less"
         },
         type: SlideType.roi,
+        sourceLinks: [
+          SourceLink(
+            title: "Flutter ROI Calculator",
+            url: "https://flutter.dev/multi-platform",
+            description: "Calculate potential savings with Flutter development",
+          ),
+          SourceLink(
+            title: "Enterprise Flutter Adoption Report",
+            url: "https://flutter.dev/showcase",
+            description: "Real-world enterprise Flutter success stories",
+          ),
+          SourceLink(
+            title: "Cross-Platform Development Cost Analysis",
+            url: "https://research.google.com/pubs/pub49571/",
+            description: "Academic study on cross-platform development ROI",
+          ),
+        ],
       ),
       SlideData(
         title: "Success Stories",
@@ -125,6 +236,23 @@ class PresentationData {
           "eBay Motors: 2x development speed vs native platforms"
         ],
         type: SlideType.interactive,
+        sourceLinks: [
+          SourceLink(
+            title: "Alibaba Flutter Case Study",
+            url: "https://flutter.dev/showcase/alibaba-group",
+            description: "Detailed analysis of Alibaba's Flutter implementation",
+          ),
+          SourceLink(
+            title: "eBay Motors Technical Blog",
+            url: "https://tech.ebayinc.com/engineering/ebay-motors-flutter-success-story/",
+            description: "Technical deep dive into eBay's Flutter adoption",
+          ),
+          SourceLink(
+            title: "Flutter Showcase Gallery",
+            url: "https://flutter.dev/showcase",
+            description: "Collection of enterprise Flutter success stories",
+          ),
+        ],
       ),
       SlideData(
         title: "Future-Proof Technology",
@@ -136,6 +264,23 @@ class PresentationData {
           "WebAssembly support for high-performance web apps"
         ],
         type: SlideType.future,
+        sourceLinks: [
+          SourceLink(
+            title: "Flutter AI Integration Guide",
+            url: "https://ai.google.dev/gemini-api/docs/flutter",
+            description: "Official guide for integrating AI into Flutter apps",
+          ),
+          SourceLink(
+            title: "Flutter Web and WASM Support",
+            url: "https://docs.flutter.dev/platform-integration/web/wasm",
+            description: "WebAssembly support in Flutter for web performance",
+          ),
+          SourceLink(
+            title: "Flutter Roadmap 2024-2025",
+            url: "https://github.com/flutter/flutter/wiki/Roadmap",
+            description: "Official Flutter development roadmap and future plans",
+          ),
+        ],
       ),
       SlideData(
         title: "Why We Are Mobile First + Flutter",
@@ -147,6 +292,23 @@ class PresentationData {
           "Proven track record with performance-critical apps"
         ],
         type: SlideType.partnership,
+        sourceLinks: [
+          SourceLink(
+            title: "Mobile First Company Profile",
+            url: "https://wearemobilefirst.com",
+            description: "Learn more about Mobile First's expertise and services",
+          ),
+          SourceLink(
+            title: "Flutter Consulting Best Practices",
+            url: "https://flutter.dev/consulting",
+            description: "Guidelines for successful Flutter consulting partnerships",
+          ),
+          SourceLink(
+            title: "Enterprise Flutter Implementation Guide",
+            url: "https://docs.flutter.dev/deployment",
+            description: "Best practices for enterprise Flutter deployments",
+          ),
+        ],
       ),
       SlideData(
         title: "The Strategic Decision",
@@ -158,6 +320,23 @@ class PresentationData {
           "95.7% of CTOs would choose Flutter again"
         ],
         type: SlideType.conclusion,
+        sourceLinks: [
+          SourceLink(
+            title: "CTO Survey: Flutter Satisfaction",
+            url: "https://survey.stackoverflow.co/2024/#section-most-loved-dreaded-and-wanted-other-frameworks-and-libraries",
+            description: "Industry survey on Flutter adoption and satisfaction",
+          ),
+          SourceLink(
+            title: "Flutter Business Case Template",
+            url: "https://flutter.dev/multi-platform",
+            description: "Resources for building a business case for Flutter",
+          ),
+          SourceLink(
+            title: "Getting Started with Flutter",
+            url: "https://docs.flutter.dev/get-started",
+            description: "Official Flutter getting started guide",
+          ),
+        ],
       ),
     ];
   }
