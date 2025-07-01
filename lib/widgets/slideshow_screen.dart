@@ -163,14 +163,6 @@ class _SlideshowScreenState extends State<SlideshowScreen>
               ],
             ),
           ),
-          Positioned(
-            top: 40,
-            right: 20,
-            child: IconButton(
-              onPressed: () => SystemNavigator.pop(),
-              icon: const Icon(Icons.close, color: Colors.white, size: 30),
-            ),
-          ),
         ],
       ),
     ),
