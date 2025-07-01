@@ -107,7 +107,18 @@ class _SlideshowScreenState extends State<SlideshowScreen>
             },
             itemCount: _slides.length,
             itemBuilder: (context, index) {
-              return SlideBuilder.buildSlide(_slides[index], _animationController);
+              return Center(
+                child: AspectRatio(
+                  aspectRatio: 800 / 900, // 8:9 aspect ratio
+                  child: Container(
+                    constraints: const BoxConstraints(
+                      maxWidth: 800,
+                      maxHeight: 900,
+                    ),
+                    child: SlideBuilder.buildSlide(_slides[index], _animationController),
+                  ),
+                ),
+              );
             },
           ),
           Positioned(
