@@ -48,34 +48,24 @@ class SlideNotesBottomSheet extends StatelessWidget {
           // Header
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Presentation Notes',
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF0D47A1),
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        slide.title,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
+                Text(
+                  'Presentation Notes',
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF0D47A1),
                   ),
                 ),
-                IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: const Icon(Icons.close),
+                const SizedBox(height: 4),
+                Text(
+                  slide.title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
                 ),
               ],
             ),
