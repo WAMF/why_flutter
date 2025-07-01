@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/slide_data.dart';
 
 class SourceLinksPage extends StatelessWidget {
@@ -102,7 +103,7 @@ class SourceLinksPage extends StatelessWidget {
                                   color: Colors.transparent,
                                   child: InkWell(
                                     borderRadius: BorderRadius.circular(16),
-                                    onTap: () => _launchUrl(sourceLink.url),
+                                    onTap: () => _launchUrl(sourceLink.url, context),
                                     child: Padding(
                                       padding: const EdgeInsets.all(24.0),
                                       child: Row(
@@ -208,10 +209,24 @@ class SourceLinksPage extends StatelessWidget {
     );
   }
 
-  void _launchUrl(String url) {
-    // In a real app, you would use url_launcher package
-    // For now, we'll just show a snackbar with the URL
-    // This is a placeholder implementation
-    print('Would launch: $url');
+  Future<void> _launchUrl(String url, BuildContext context) async {
+    try {
+      final Uri uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        throw 'Could not launch $url';
+      }
+    } catch (e) {
+      // Show error message to user
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Could not open link: $url'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }

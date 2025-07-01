@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/slide_data.dart';
 
 class SlideNotesBottomSheet extends StatelessWidget {
@@ -20,8 +21,6 @@ class SlideNotesBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasNotes = slide.speakingNotes != null && slide.speakingNotes!.isNotEmpty;
-    final hasLinks = slide.sourceLinks != null && slide.sourceLinks!.isNotEmpty;
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.7,
@@ -375,9 +374,24 @@ class _NotesBottomSheetContentState extends State<_NotesBottomSheetContent> {
     );
   }
 
-  void _launchUrl(String url) {
-    // In a real app, you would use url_launcher package
-    // For now, we'll just show a snackbar with the URL
-    print('Would launch: $url');
+  Future<void> _launchUrl(String url) async {
+    try {
+      final Uri uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        throw 'Could not launch $url';
+      }
+    } catch (e) {
+      // Show error message to user
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Could not open link: $url'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }
