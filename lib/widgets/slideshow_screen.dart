@@ -133,6 +133,12 @@ class _SlideshowScreenState extends State<SlideshowScreen>
                       onPressed: _currentSlide < _slides.length - 1 ? _nextSlide : null,
                       icon: const Icon(Icons.arrow_forward_ios, color: Colors.white),
                     ),
+                    const SizedBox(width: 20),
+                    IconButton(
+                      onPressed: () => SlideNotesBottomSheet.show(context, _slides[_currentSlide]),
+                      icon: const Icon(Icons.speaker_notes, color: Colors.white),
+                      tooltip: 'Show speaker notes',
+                    ),
                   ],
                 ),
                 Row(
