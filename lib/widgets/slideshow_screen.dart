@@ -15,6 +15,7 @@ class _SlideshowScreenState extends State<SlideshowScreen>
   late PageController _pageController;
   late AnimationController _animationController;
   int _currentSlide = 0;
+  bool _presentationStarted = false;
   final List<SlideData> _slides = PresentationData.getSlides();
 
   @override
@@ -26,6 +27,14 @@ class _SlideshowScreenState extends State<SlideshowScreen>
       vsync: this,
     );
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  }
+
+  void _startPresentation() {
+    setState(() {
+      _presentationStarted = true;
+    });
+    // Start the first slide animation
+    _animationController.forward();
   }
 
   @override
@@ -64,6 +73,10 @@ class _SlideshowScreenState extends State<SlideshowScreen>
 
   @override
   Widget build(BuildContext context) {
+    if (!_presentationStarted) {
+      return StartScreen(onStart: _startPresentation);
+    }
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -74,8 +87,10 @@ class _SlideshowScreenState extends State<SlideshowScreen>
               setState(() {
                 _currentSlide = index;
               });
-              _animationController.reset();
-              _animationController.forward();
+              if (_presentationStarted) {
+                _animationController.reset();
+                _animationController.forward();
+              }
             },
             itemCount: _slides.length,
             itemBuilder: (context, index) {
