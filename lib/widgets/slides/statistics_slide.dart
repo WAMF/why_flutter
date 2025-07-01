@@ -71,15 +71,6 @@ class StatisticsSlide extends StatelessWidget {
                               height: 1.2,
                             ),
                           ),
-                          const SizedBox(height: 16),
-                          Text(
-                            slide.subtitle,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              color: Colors.white70,
-                              height: 1.3,
-                            ),
-                          ),
                         ],
                       ),
                     ),

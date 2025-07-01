@@ -71,28 +71,18 @@ class PerformanceSlide extends StatelessWidget {
                               ),
                               const SizedBox(width: 16),
                               Expanded(
-                                child: Text(
-                                  slide.title,
-                                  style: const TextStyle(
-                                    fontSize: 48,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    height: 1.2,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            slide.subtitle,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              color: Colors.white70,
-                              height: 1.3,
-                            ),
-                          ),
-                        ],
+                                 child: Text(
+                                   slide.title,
+                                   style: const TextStyle(
+                                     fontSize: 48,
+                                     fontWeight: FontWeight.bold,
+                                     color: Colors.white,
+                                     height: 1.2,
+                                   ),
+                                 ),
+                               ),
+                             ],
+                           ),                        ],
                       ),
                     ),
                   ),

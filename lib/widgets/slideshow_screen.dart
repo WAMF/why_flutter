@@ -79,8 +79,21 @@ class _SlideshowScreenState extends State<SlideshowScreen>
 
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Stack(
-        children: [
+      body: KeyboardListener(
+        focusNode: FocusNode()..requestFocus(),
+        autofocus: true,
+        onKeyEvent: (KeyEvent event) {
+          if (event is KeyDownEvent) {
+            if (event.logicalKey == LogicalKeyboardKey.space ||
+                event.logicalKey == LogicalKeyboardKey.arrowRight) {
+              _nextSlide();
+            } else if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
+              _previousSlide();
+            }
+          }
+        },
+        child: Stack(
+          children: [
           PageView.builder(
             controller: _pageController,
             onPageChanged: (index) {
@@ -154,6 +167,7 @@ class _SlideshowScreenState extends State<SlideshowScreen>
           ),
         ],
       ),
+    ),
     );
   }
 }

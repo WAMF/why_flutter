@@ -73,51 +73,102 @@ class SlideNotesBottomSheet extends StatelessWidget {
           
           // Content
           Expanded(
-            child: DefaultTabController(
-              length: hasNotes && hasLinks ? 2 : 1,
-              child: Column(
-                children: [
-                  if (hasNotes && hasLinks)
-                    TabBar(
-                      labelColor: const Color(0xFF0D47A1),
-                      unselectedLabelColor: Colors.grey,
-                      indicatorColor: const Color(0xFF0D47A1),
-                      tabs: const [
-                        Tab(
-                          icon: Icon(Icons.speaker_notes),
-                          text: 'Speaking Notes',
-                        ),
-                        Tab(
-                          icon: Icon(Icons.link),
-                          text: 'Sources',
-                        ),
-                      ],
-                    ),
-                  
-                  Expanded(
-                    child: hasNotes && hasLinks
-                        ? TabBarView(
-                            children: [
-                              _buildNotesTab(),
-                              _buildSourcesTab(),
-                            ],
-                          )
-                        : hasNotes
-                            ? _buildNotesTab()
-                            : hasLinks
-                                ? _buildSourcesTab()
-                                : _buildEmptyState(),
-                  ),
-                ],
-              ),
-            ),
+            child: _NotesBottomSheetContent(slide: slide),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildNotesTab() {
+
+}
+
+class _NotesBottomSheetContent extends StatefulWidget {
+  final SlideData slide;
+
+  const _NotesBottomSheetContent({required this.slide});
+
+  @override
+  State<_NotesBottomSheetContent> createState() => _NotesBottomSheetContentState();
+}
+
+class _NotesBottomSheetContentState extends State<_NotesBottomSheetContent> {
+  bool _showingSources = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final hasNotes = widget.slide.speakingNotes != null && widget.slide.speakingNotes!.isNotEmpty;
+    final hasLinks = widget.slide.sourceLinks != null && widget.slide.sourceLinks!.isNotEmpty;
+
+    if (!hasNotes && !hasLinks) {
+      return _buildEmptyState();
+    }
+
+    // If only one type of content, show it directly
+    if (hasNotes && !hasLinks) {
+      return _buildNotesContent();
+    }
+    if (hasLinks && !hasNotes) {
+      return _buildSourcesContent();
+    }
+
+    // Both types available - show toggle
+    return Column(
+      children: [
+        Expanded(
+          child: _showingSources ? _buildSourcesContent() : _buildNotesContent(),
+        ),
+        Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.grey.withOpacity(0.05),
+            border: Border(
+              top: BorderSide(
+                color: Colors.grey.withOpacity(0.2),
+                width: 1,
+              ),
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton.icon(
+                onPressed: () => setState(() => _showingSources = false),
+                icon: Icon(
+                  Icons.speaker_notes,
+                  color: !_showingSources ? const Color(0xFF0D47A1) : Colors.grey,
+                ),
+                label: Text(
+                  'Speaking Notes',
+                  style: TextStyle(
+                    color: !_showingSources ? const Color(0xFF0D47A1) : Colors.grey,
+                    fontWeight: !_showingSources ? FontWeight.bold : FontWeight.normal,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 20),
+              TextButton.icon(
+                onPressed: () => setState(() => _showingSources = true),
+                icon: Icon(
+                  Icons.link,
+                  color: _showingSources ? const Color(0xFF0D47A1) : Colors.grey,
+                ),
+                label: Text(
+                  'Sources',
+                  style: TextStyle(
+                    color: _showingSources ? const Color(0xFF0D47A1) : Colors.grey,
+                    fontWeight: _showingSources ? FontWeight.bold : FontWeight.normal,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNotesContent() {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -144,9 +195,9 @@ class SlideNotesBottomSheet extends StatelessWidget {
           const SizedBox(height: 16),
           Expanded(
             child: ListView.builder(
-              itemCount: slide.speakingNotes?.length ?? 0,
+              itemCount: widget.slide.speakingNotes?.length ?? 0,
               itemBuilder: (context, index) {
-                final note = slide.speakingNotes![index];
+                final note = widget.slide.speakingNotes![index];
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 16),
                   child: Container(
@@ -194,7 +245,7 @@ class SlideNotesBottomSheet extends StatelessWidget {
     );
   }
 
-  Widget _buildSourcesTab() {
+  Widget _buildSourcesContent() {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -221,9 +272,9 @@ class SlideNotesBottomSheet extends StatelessWidget {
           const SizedBox(height: 16),
           Expanded(
             child: ListView.builder(
-              itemCount: slide.sourceLinks?.length ?? 0,
+              itemCount: widget.slide.sourceLinks?.length ?? 0,
               itemBuilder: (context, index) {
-                final source = slide.sourceLinks![index];
+                final source = widget.slide.sourceLinks![index];
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 12),
                   child: Container(
