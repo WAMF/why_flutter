@@ -214,25 +214,14 @@ class _StartScreenState extends State<StartScreen>
                     // Footer
                     Padding(
                       padding: const EdgeInsets.all(20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Mobile First + Flutter',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white.withOpacity(0.6),
-                            ),
+                      child: Center(
+                        child: Text(
+                          'Mobile First + Flutter',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white.withOpacity(0.6),
                           ),
-                          IconButton(
-                            onPressed: () => SystemNavigator.pop(),
-                            icon: Icon(
-                              Icons.close,
-                              color: Colors.white.withOpacity(0.6),
-                              size: 24,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ],
