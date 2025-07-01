@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/slide_data.dart';
-import 'source_links_page.dart';
+import 'slide_notes_bottom_sheet.dart';
 
 class SlideFootnote extends StatelessWidget {
   final SlideData slide;
@@ -12,7 +12,10 @@ class SlideFootnote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (slide.sourceLinks == null || slide.sourceLinks!.isEmpty) {
+    final hasNotes = slide.speakingNotes != null && slide.speakingNotes!.isNotEmpty;
+    final hasLinks = slide.sourceLinks != null && slide.sourceLinks!.isNotEmpty;
+    
+    if (!hasNotes && !hasLinks) {
       return const SizedBox.shrink();
     }
 
@@ -23,7 +26,7 @@ class SlideFootnote extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
-          onTap: () => _navigateToSources(context),
+          onTap: () => _showNotesBottomSheet(context),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
@@ -65,27 +68,7 @@ class SlideFootnote extends StatelessWidget {
     );
   }
 
-  void _navigateToSources(BuildContext context) {
-    Navigator.of(context).push(
-      PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            SourceLinksPage(slide: slide),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(1.0, 0.0);
-          const end = Offset.zero;
-          const curve = Curves.easeInOut;
-
-          var tween = Tween(begin: begin, end: end).chain(
-            CurveTween(curve: curve),
-          );
-
-          return SlideTransition(
-            position: animation.drive(tween),
-            child: child,
-          );
-        },
-        transitionDuration: const Duration(milliseconds: 300),
-      ),
-    );
+  void _showNotesBottomSheet(BuildContext context) {
+    SlideNotesBottomSheet.show(context, slide);
   }
 }

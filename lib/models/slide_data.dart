@@ -7,6 +7,7 @@ class SlideData {
   final SlideType type;
   final String? backgroundImage;
   final List<SourceLink>? sourceLinks;
+  final List<String>? speakingNotes;
 
   SlideData({
     required this.title,
@@ -17,6 +18,7 @@ class SlideData {
     required this.type,
     this.backgroundImage,
     this.sourceLinks,
+    this.speakingNotes,
   });
 }
 
@@ -67,6 +69,12 @@ class PresentationData {
             description: "Latest Flutter announcements and roadmap",
           ),
         ],
+        speakingNotes: [
+          "Welcome everyone to this presentation on Flutter as the strategic choice for cross-platform development.",
+          "Today I'll be showing you why Flutter has become the leading framework for enterprise mobile development.",
+          "We'll cover three key areas: market leadership, technical superiority, and measurable business impact.",
+          "By the end of this presentation, you'll understand why 95.7% of CTOs would choose Flutter again for their next project."
+        ],
       ),
       SlideData(
         title: "Market Leadership & Momentum",
@@ -101,6 +109,13 @@ class PresentationData {
             description: "Cross-platform framework market share analysis",
           ),
         ],
+        speakingNotes: [
+          "Let's start with the numbers that matter. Flutter has achieved a commanding 46% market share in cross-platform development.",
+          "This represents a 14-point lead over React Native, which sits at 32%. This isn't just a small advantage - it's market dominance.",
+          "The GitHub community shows strong support with 170k stars, significantly ahead of React Native's 121k.",
+          "Most importantly, developers love working with Flutter - 64% satisfaction rate is the highest among all cross-platform frameworks.",
+          "Perhaps most telling: 30% of all new iOS apps are now being built with Flutter, showing real enterprise adoption."
+        ],
       ),
       SlideData(
         title: "Enterprise Adoption",
@@ -128,6 +143,13 @@ class PresentationData {
             url: "https://tech.ebayinc.com/engineering/ebay-motors-flutter-success-story/",
             description: "eBay's 98.3% code sharing achievement with Flutter",
           ),
+        ],
+        speakingNotes: [
+          "Let's look at real enterprise adoption. These aren't small startups - these are global industry leaders.",
+          "BMW deployed Flutter across 47 countries with a single codebase, managing their global automotive app ecosystem.",
+          "Toyota integrated Flutter into their automotive systems, showing trust in mission-critical applications.",
+          "Alibaba's Xianyu marketplace serves over 50 million users, proving Flutter can handle massive scale.",
+          "eBay Motors achieved 98.3% code sharing - that's nearly complete code reusability across platforms."
         ],
       ),
       SlideData(
@@ -162,6 +184,13 @@ class PresentationData {
             url: "https://www.youtube.com/watch?v=PKGguGUwSYE",
             description: "Deep dive into Flutter's rendering performance",
           ),
+        ],
+        speakingNotes: [
+          "Performance is where Flutter truly shines. Let's look at the measurable advantages that impact user experience.",
+          "Startup time is critical for user retention. Flutter apps start in 2 seconds compared to 4-10 seconds for other frameworks.",
+          "Flutter maintains consistent 60 FPS performance thanks to its custom rendering engine, while other frameworks show variable performance.",
+          "Battery efficiency is 18% better - this means longer device usage and happier users.",
+          "During intensive operations, Flutter uses 50% less CPU, leaving more resources for other device functions."
         ],
       ),
       SlideData(
@@ -224,6 +253,13 @@ class PresentationData {
             url: "https://research.google.com/pubs/pub49571/",
             description: "Academic study on cross-platform development ROI",
           ),
+        ],
+        speakingNotes: [
+          "Now let's talk about the bottom line - return on investment. These aren't theoretical numbers, they're from real enterprise implementations.",
+          "Development cycles are 50-77% faster because you're writing one codebase instead of separate iOS and Android apps.",
+          "For MVP development, teams see 2-3x speed improvement, getting to market faster than competitors.",
+          "Initial development costs are reduced by 30-50% - that's significant budget savings that can be reinvested elsewhere.",
+          "Ongoing maintenance is 15-20% less expensive because you're maintaining one codebase instead of multiple platform-specific codebases."
         ],
       ),
       SlideData(
@@ -336,6 +372,13 @@ class PresentationData {
             url: "https://docs.flutter.dev/get-started",
             description: "Official Flutter getting started guide",
           ),
+        ],
+        speakingNotes: [
+          "Let me summarize why Flutter is the strategic choice that gives you a competitive advantage.",
+          "Short-term benefits are immediate: 2-3x faster development and 30-50% cost savings start from day one.",
+          "Medium-term, you'll see easier maintenance and can structure your team around one technology stack instead of multiple.",
+          "Long-term, Flutter positions you for platform expansion and emerging technologies like AI integration.",
+          "The proof is in the satisfaction: 95.7% of CTOs who chose Flutter would make the same decision again. That's unprecedented confidence in a technology choice."
         ],
       ),
     ];

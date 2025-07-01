@@ -10,3 +10,4 @@ export 'slides/conclusion_slide.dart';
 export 'slide_footnote.dart';
 export 'source_links_page.dart';
 export 'start_screen.dart';
+export 'slide_notes_bottom_sheet.dart';
