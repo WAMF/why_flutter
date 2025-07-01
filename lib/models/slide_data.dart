@@ -118,13 +118,13 @@ class PresentationData {
         ],
       ),
       SlideData(
-        title: "Enterprise Adoption",
-        subtitle: "Trusted by Industry Leaders",
+        title: "Enterprise Success Stories",
+        subtitle: "Proven at Scale by Industry Leaders",
         bulletPoints: [
-          "BMW: 47 countries, single codebase",
-          "Toyota: Automotive systems integration",
-          "Alibaba: 50+ million users on Xianyu",
-          "eBay Motors: 98.3% code sharing across platforms"
+          "BMW: Global deployment across 47 countries",
+          "Alibaba Xianyu: 50M+ users, 50% faster development",
+          "eBay Motors: 98.3% code sharing, 2x development speed",
+          "Toyota: Mission-critical automotive systems"
         ],
         type: SlideType.interactive,
         sourceLinks: [
@@ -139,27 +139,27 @@ class PresentationData {
             description: "Alibaba's 50M+ user Flutter implementation",
           ),
           SourceLink(
-            title: "eBay Motors Flutter Implementation",
+            title: "eBay Motors Technical Blog",
             url: "https://tech.ebayinc.com/engineering/ebay-motors-flutter-success-story/",
-            description: "eBay's 98.3% code sharing achievement with Flutter",
+            description: "Technical deep dive into eBay's Flutter adoption",
           ),
         ],
         speakingNotes: [
-          "Let's look at real enterprise adoption. These aren't small startups - these are global industry leaders.",
+          "These aren't small startups - these are global industry leaders proving Flutter works at enterprise scale.",
           "BMW deployed Flutter across 47 countries with a single codebase, managing their global automotive app ecosystem.",
-          "Toyota integrated Flutter into their automotive systems, showing trust in mission-critical applications.",
-          "Alibaba's Xianyu marketplace serves over 50 million users, proving Flutter can handle massive scale.",
-          "eBay Motors achieved 98.3% code sharing - that's nearly complete code reusability across platforms."
+          "Alibaba's Xianyu marketplace serves over 50 million users with 50% faster feature development cycles.",
+          "eBay Motors achieved 98.3% code sharing and doubled their development speed compared to native development.",
+          "Toyota's adoption for automotive systems proves Flutter's reliability in mission-critical applications."
         ],
       ),
       SlideData(
-        title: "Superior Performance",
-        subtitle: "Measurable Advantages Where It Matters Most",
+        title: "Technical & Performance Excellence",
+        subtitle: "Built for Speed, Scalability & Multi-Platform Success",
         bulletPoints: [
-          "2x faster startup time (2s vs 4-10s)",
-          "Consistent 60 FPS vs variable performance",
-          "18% better battery efficiency",
-          "50% lower CPU usage during intensive operations"
+          "2x faster startup (2s vs 4-10s), 60 FPS consistency",
+          "Custom rendering engine eliminates JavaScript bridge",
+          "18% better battery efficiency, 50% lower CPU usage",
+          "Single codebase deploys to 6+ platforms seamlessly"
         ],
         statistics: {
           "Startup Time": "2x faster",
@@ -175,50 +175,21 @@ class PresentationData {
             description: "Official Flutter performance optimization guide",
           ),
           SourceLink(
-            title: "Flutter vs React Native Performance Study",
-            url: "https://medium.com/flutter/flutter-vs-react-native-performance-comparison-2021-662e9b3d7c32",
-            description: "Comprehensive performance benchmarking analysis",
-          ),
-          SourceLink(
-            title: "Google I/O Flutter Performance Talk",
-            url: "https://www.youtube.com/watch?v=PKGguGUwSYE",
-            description: "Deep dive into Flutter's rendering performance",
-          ),
-        ],
-        speakingNotes: [
-          "Performance is where Flutter truly shines. Let's look at the measurable advantages that impact user experience.",
-          "Startup time is critical for user retention. Flutter apps start in 2 seconds compared to 4-10 seconds for other frameworks.",
-          "Flutter maintains consistent 60 FPS performance thanks to its custom rendering engine, while other frameworks show variable performance.",
-          "Battery efficiency is 18% better - this means longer device usage and happier users.",
-          "During intensive operations, Flutter uses 50% less CPU, leaving more resources for other device functions."
-        ],
-      ),
-      SlideData(
-        title: "Technical Excellence",
-        subtitle: "Architecture Built for Performance",
-        bulletPoints: [
-          "Custom rendering engine ensures pixel-perfect consistency",
-          "Ahead-of-Time compilation eliminates JavaScript bridge",
-          "Direct native communication vs bridge bottlenecks",
-          "Single codebase deploys to 6+ platforms"
-        ],
-        type: SlideType.interactive,
-        sourceLinks: [
-          SourceLink(
             title: "Flutter Architecture Overview",
             url: "https://docs.flutter.dev/resources/architectural-overview",
             description: "Technical deep dive into Flutter's architecture",
           ),
           SourceLink(
-            title: "Flutter Rendering Pipeline",
-            url: "https://docs.flutter.dev/resources/inside-flutter",
-            description: "How Flutter's custom rendering engine works",
+            title: "Flutter vs React Native Performance Study",
+            url: "https://medium.com/flutter/flutter-vs-react-native-performance-comparison-2021-662e9b3d7c32",
+            description: "Comprehensive performance benchmarking analysis",
           ),
-          SourceLink(
-            title: "Dart AOT Compilation",
-            url: "https://dart.dev/tools/dart-compile",
-            description: "Understanding Dart's ahead-of-time compilation",
-          ),
+        ],
+        speakingNotes: [
+          "Flutter's technical architecture delivers measurable performance advantages that directly impact user experience and business outcomes.",
+          "Apps start in 2 seconds vs 4-10 seconds for other frameworks, with consistent 60 FPS performance thanks to the custom rendering engine.",
+          "The ahead-of-time compilation eliminates JavaScript bridge bottlenecks, resulting in 18% better battery efficiency and 50% lower CPU usage.",
+          "This superior architecture enables true write-once, deploy-everywhere functionality across 6+ platforms from a single codebase."
         ],
       ),
       SlideData(
@@ -263,41 +234,13 @@ class PresentationData {
         ],
       ),
       SlideData(
-        title: "Success Stories",
-        subtitle: "Alibaba & eBay Motors Case Studies",
+        title: "Future-Ready Platform",
+        subtitle: "AI Integration & Emerging Technologies",
         bulletPoints: [
-          "Alibaba: 50% faster feature development (1 month → 2 weeks)",
-          "Alibaba: 50+ million downloads from single codebase",
-          "eBay Motors: 220,000+ lines of shared code (98.3% reusability)",
-          "eBay Motors: 2x development speed vs native platforms"
-        ],
-        type: SlideType.interactive,
-        sourceLinks: [
-          SourceLink(
-            title: "Alibaba Flutter Case Study",
-            url: "https://flutter.dev/showcase/alibaba-group",
-            description: "Detailed analysis of Alibaba's Flutter implementation",
-          ),
-          SourceLink(
-            title: "eBay Motors Technical Blog",
-            url: "https://tech.ebayinc.com/engineering/ebay-motors-flutter-success-story/",
-            description: "Technical deep dive into eBay's Flutter adoption",
-          ),
-          SourceLink(
-            title: "Flutter Showcase Gallery",
-            url: "https://flutter.dev/showcase",
-            description: "Collection of enterprise Flutter success stories",
-          ),
-        ],
-      ),
-      SlideData(
-        title: "Future-Proof Technology",
-        subtitle: "Built for the AI Era & Beyond",
-        bulletPoints: [
-          "Native Gemini AI integration for intelligent features",
-          "Real-time AI chat in <50 lines of code",
-          "6+ platforms from single codebase",
-          "WebAssembly support for high-performance web apps"
+          "Native Gemini AI integration in <50 lines of code",
+          "WebAssembly support for high-performance web",
+          "Desktop, mobile, web deployment from single codebase",
+          "Continuously evolving with Google's innovation pipeline"
         ],
         type: SlideType.future,
         sourceLinks: [
