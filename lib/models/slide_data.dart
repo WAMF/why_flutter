@@ -42,7 +42,7 @@ enum SlideType {
   future,
   partnership,
   interactive,
-  conclusion
+  conclusion,
 }
 
 class PresentationData {
@@ -54,7 +54,7 @@ class PresentationData {
         bulletPoints: [
           "Market-leading framework with proven enterprise adoption",
           "Superior performance and technical architecture",
-          "Measurable ROI and business impact"
+          "Measurable ROI and business impact",
         ],
         type: SlideType.title,
         sourceLinks: [
@@ -73,7 +73,7 @@ class PresentationData {
           "Welcome everyone to this presentation on Flutter as the strategic choice for cross-platform development.",
           "Today I'll be showing you why Flutter has become the leading framework for enterprise mobile development.",
           "We'll cover three key areas: market leadership, technical superiority, and measurable business impact.",
-          "By the end of this presentation, you'll understand why 95.7% of CTOs would choose Flutter again for their next project."
+          "By the end of this presentation, you'll understand why 95.7% of CTOs would choose Flutter again for their next project.",
         ],
       ),
       SlideData(
@@ -83,13 +83,13 @@ class PresentationData {
           "46% global market share vs React Native's 32%",
           "170k GitHub stars vs React Native's 121k",
           "64% developer satisfaction (highest among frameworks)",
-          "30% of all new iOS apps built with Flutter"
+          "30% of all new iOS apps built with Flutter",
         ],
         statistics: {
           "Market Share": "46%",
           "GitHub Stars": "170k",
           "Developer Satisfaction": "64%",
-          "New iOS Apps": "30%"
+          "New iOS Apps": "30%",
         },
         type: SlideType.statistics,
         sourceLinks: [
@@ -105,7 +105,8 @@ class PresentationData {
           ),
           SourceLink(
             title: "Statista Mobile Framework Report 2024",
-            url: "https://www.statista.com/statistics/869224/worldwide-software-developer-working-hours/",
+            url:
+                "https://www.statista.com/statistics/869224/worldwide-software-developer-working-hours/",
             description: "Cross-platform framework market share analysis",
           ),
         ],
@@ -114,7 +115,7 @@ class PresentationData {
           "This represents a 14-point lead over React Native, which sits at 32%. This isn't just a small advantage - it's market dominance.",
           "The GitHub community shows strong support with 170k stars, significantly ahead of React Native's 121k.",
           "Most importantly, developers love working with Flutter - 64% satisfaction rate is the highest among all cross-platform frameworks.",
-          "Perhaps most telling: 30% of all new iOS apps are now being built with Flutter, showing real enterprise adoption."
+          "Perhaps most telling: 30% of all new iOS apps are now being built with Flutter, showing real enterprise adoption.",
         ],
       ),
       SlideData(
@@ -124,7 +125,7 @@ class PresentationData {
           "BMW: Global deployment across 47 countries",
           "Alibaba Xianyu: 50M+ users, 50% faster development",
           "eBay Motors: 98.3% code sharing, 2x development speed",
-          "Toyota: Mission-critical automotive systems"
+          "Toyota: Mission-critical automotive systems",
         ],
         type: SlideType.interactive,
         sourceLinks: [
@@ -140,7 +141,7 @@ class PresentationData {
           ),
           SourceLink(
             title: "eBay Motors Technical Blog",
-            url: "https://tech.ebayinc.com/engineering/ebay-motors-flutter-success-story/",
+            url: "https://flutter.dev/showcase/ebay",
             description: "Technical deep dive into eBay's Flutter adoption",
           ),
         ],
@@ -149,7 +150,7 @@ class PresentationData {
           "BMW deployed Flutter across 47 countries with a single codebase, managing their global automotive app ecosystem.",
           "Alibaba's Xianyu marketplace serves over 50 million users with 50% faster feature development cycles.",
           "eBay Motors achieved 98.3% code sharing and doubled their development speed compared to native development.",
-          "Toyota's adoption for automotive systems proves Flutter's reliability in mission-critical applications."
+          "Toyota's adoption for automotive systems proves Flutter's reliability in mission-critical applications.",
         ],
       ),
       SlideData(
@@ -159,13 +160,13 @@ class PresentationData {
           "2x faster startup (2s vs 4-10s), 60 FPS consistency",
           "Custom rendering engine eliminates JavaScript bridge",
           "18% better battery efficiency, 50% lower CPU usage",
-          "Single codebase deploys to 6+ platforms seamlessly"
+          "Single codebase deploys to 6+ platforms seamlessly",
         ],
         statistics: {
           "Startup Time": "2x faster",
           "Frame Rate": "60 FPS",
           "Battery Efficiency": "18% better",
-          "CPU Usage": "50% lower"
+          "CPU Usage": "50% lower",
         },
         type: SlideType.performance,
         sourceLinks: [
@@ -181,7 +182,8 @@ class PresentationData {
           ),
           SourceLink(
             title: "Flutter vs React Native Performance Study",
-            url: "https://medium.com/flutter/flutter-vs-react-native-performance-comparison-2021-662e9b3d7c32",
+            url:
+                "https://nateshmbhat.medium.com/flutter-vs-react-native-performance-benchmarks-you-cant-miss-%EF%B8%8F-2e31905df9b4",
             description: "Comprehensive performance benchmarking analysis",
           ),
         ],
@@ -189,7 +191,7 @@ class PresentationData {
           "Flutter's technical architecture delivers measurable performance advantages that directly impact user experience and business outcomes.",
           "Apps start in 2 seconds vs 4-10 seconds for other frameworks, with consistent 60 FPS performance thanks to the custom rendering engine.",
           "The ahead-of-time compilation eliminates JavaScript bridge bottlenecks, resulting in 18% better battery efficiency and 50% lower CPU usage.",
-          "This superior architecture enables true write-once, deploy-everywhere functionality across 6+ platforms from a single codebase."
+          "This superior architecture enables true write-once, deploy-everywhere functionality across 6+ platforms from a single codebase.",
         ],
       ),
       SlideData(
@@ -199,13 +201,13 @@ class PresentationData {
           "50-77% faster development cycles",
           "2-3x faster MVP development",
           "30-50% cost savings in initial development",
-          "15-20% ongoing maintenance reduction"
+          "15-20% ongoing maintenance reduction",
         ],
         statistics: {
           "Development Speed": "50-77% faster",
           "MVP Development": "2-3x faster",
           "Cost Savings": "30-50%",
-          "Maintenance": "15-20% less"
+          "Maintenance": "15-20% less",
         },
         type: SlideType.roi,
         sourceLinks: [
@@ -230,7 +232,7 @@ class PresentationData {
           "Development cycles are 50-77% faster because you're writing one codebase instead of separate iOS and Android apps.",
           "For MVP development, teams see 2-3x speed improvement, getting to market faster than competitors.",
           "Initial development costs are reduced by 30-50% - that's significant budget savings that can be reinvested elsewhere.",
-          "Ongoing maintenance is 15-20% less expensive because you're maintaining one codebase instead of multiple platform-specific codebases."
+          "Ongoing maintenance is 15-20% less expensive because you're maintaining one codebase instead of multiple platform-specific codebases.",
         ],
       ),
       SlideData(
@@ -240,7 +242,7 @@ class PresentationData {
           "Native Gemini AI integration in <50 lines of code",
           "WebAssembly support for high-performance web",
           "Desktop, mobile, web deployment from single codebase",
-          "Continuously evolving with Google's innovation pipeline"
+          "Continuously evolving with Google's innovation pipeline",
         ],
         type: SlideType.future,
         sourceLinks: [
@@ -257,7 +259,8 @@ class PresentationData {
           SourceLink(
             title: "Flutter Roadmap 2024-2025",
             url: "https://github.com/flutter/flutter/wiki/Roadmap",
-            description: "Official Flutter development roadmap and future plans",
+            description:
+                "Official Flutter development roadmap and future plans",
           ),
         ],
       ),
@@ -268,19 +271,21 @@ class PresentationData {
           "20+ years mobile development experience",
           "Full-stack Flutter implementation expertise",
           "Enterprise-grade deployment experience",
-          "Proven track record with performance-critical apps"
+          "Proven track record with performance-critical apps",
         ],
         type: SlideType.partnership,
         sourceLinks: [
           SourceLink(
             title: "Mobile First Company Profile",
             url: "https://wearemobilefirst.com",
-            description: "Learn more about Mobile First's expertise and services",
+            description:
+                "Learn more about Mobile First's expertise and services",
           ),
           SourceLink(
             title: "Flutter Consulting Best Practices",
             url: "https://flutter.dev/consulting",
-            description: "Guidelines for successful Flutter consulting partnerships",
+            description:
+                "Guidelines for successful Flutter consulting partnerships",
           ),
           SourceLink(
             title: "Enterprise Flutter Implementation Guide",
@@ -296,13 +301,14 @@ class PresentationData {
           "Short-term: 2-3x faster development, 30-50% cost savings",
           "Medium-term: Easier maintenance, unified team structure",
           "Long-term: Platform expansion, AI integration capabilities",
-          "95.7% of CTOs would choose Flutter again"
+          "95.7% of CTOs would choose Flutter again",
         ],
         type: SlideType.conclusion,
         sourceLinks: [
           SourceLink(
             title: "CTO Survey: Flutter Satisfaction",
-            url: "https://survey.stackoverflow.co/2024/#section-most-loved-dreaded-and-wanted-other-frameworks-and-libraries",
+            url:
+                "https://survey.stackoverflow.co/2024/#section-most-loved-dreaded-and-wanted-other-frameworks-and-libraries",
             description: "Industry survey on Flutter adoption and satisfaction",
           ),
           SourceLink(
@@ -321,7 +327,7 @@ class PresentationData {
           "Short-term benefits are immediate: 2-3x faster development and 30-50% cost savings start from day one.",
           "Medium-term, you'll see easier maintenance and can structure your team around one technology stack instead of multiple.",
           "Long-term, Flutter positions you for platform expansion and emerging technologies like AI integration.",
-          "The proof is in the satisfaction: 95.7% of CTOs who chose Flutter would make the same decision again. That's unprecedented confidence in a technology choice."
+          "The proof is in the satisfaction: 95.7% of CTOs who chose Flutter would make the same decision again. That's unprecedented confidence in a technology choice.",
         ],
       ),
     ];
