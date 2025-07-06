@@ -1,11 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:desktop_drop/desktop_drop.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:http/http.dart' as http;
 import '../models/slide_data.dart';
 import '../services/presentation_service.dart';
 
@@ -20,27 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _dragging = false;
   bool _loading = false;
   String? _errorMessage;
-  List<String> _recentPresentations = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _loadRecentPresentations();
-  }
-
-  Future<void> _loadRecentPresentations() async {
-    if (!kIsWeb) {
-      try {
-        final presentations =
-            await PresentationService.getAvailablePresentations();
-        setState(() {
-          _recentPresentations = presentations;
-        });
-      } catch (e) {
-        debugPrint('Error loading recent presentations: $e');
-      }
-    }
-  }
 
   Future<void> _loadPresentationFromFile() async {
     setState(() {
@@ -49,29 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     try {
-      final result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['json'],
-      );
-
-      if (result != null) {
-        String jsonContent;
-
-        if (kIsWeb && result.files.single.bytes != null) {
-          jsonContent = utf8.decode(result.files.single.bytes!);
-        } else if (result.files.single.path != null) {
-          final file = File(result.files.single.path!);
-          jsonContent = await file.readAsString();
-        } else {
-          throw Exception('Unable to read file');
-        }
-
-        final json = jsonDecode(jsonContent) as Map<String, dynamic>;
-        final presentation = Presentation.fromJson(json);
-
-        if (mounted) {
-          context.go('/presentation', extra: presentation);
-        }
+      final presentation = await PresentationService.loadPresentation();
+      if (presentation != null && mounted) {
+        context.go('/presentation', extra: presentation);
       }
     } catch (e) {
       setState(() {
@@ -240,47 +196,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 const CircularProgressIndicator(),
               ],
 
-              // Recent Presentations (for non-web platforms)
-              if (!kIsWeb && _recentPresentations.isNotEmpty) ...[
-                const SizedBox(height: 48),
-                Text(
-                  'Recent Presentations',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey.shade300,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                ...(_recentPresentations.map(
-                  (fileName) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: ListTile(
-                      leading: const Icon(
-                        Icons.description,
-                        color: Colors.blue,
-                      ),
-                      title: Text(
-                        fileName,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      onTap: () async {
-                        final presentation =
-                            await PresentationService.loadPresentation(
-                              fileName: fileName,
-                            );
-                        if (presentation != null && mounted) {
-                          context.go('/presentation', extra: presentation);
-                        }
-                      },
-                      tileColor: Colors.grey.withValues(alpha: 0.1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                  ),
-                )),
-              ],
             ],
           ),
         ),
