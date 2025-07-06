@@ -28,10 +28,7 @@ class InteractiveSlide extends StatelessWidget {
     );
 
     final highlightAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: animationController,
-        curve: Curves.easeInOut,
-      ),
+      CurvedAnimation(parent: animationController, curve: Curves.easeInOut),
     );
 
     return Container(
@@ -71,7 +68,9 @@ class InteractiveSlide extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(12),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.teal.withOpacity(0.3 * highlightAnimation.value),
+                                      color: Colors.teal.withOpacity(
+                                        0.3 * highlightAnimation.value,
+                                      ),
                                       blurRadius: 20,
                                       spreadRadius: 5,
                                     ),
@@ -95,8 +94,9 @@ class InteractiveSlide extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                             ],
-                           ),                        ],
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -110,7 +110,9 @@ class InteractiveSlide extends StatelessWidget {
                           itemCount: slide.bulletPoints.length,
                           itemBuilder: (context, index) {
                             return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 12.0),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 12.0,
+                              ),
                               child: Container(
                                 padding: const EdgeInsets.all(24),
                                 decoration: BoxDecoration(
@@ -122,7 +124,9 @@ class InteractiveSlide extends StatelessWidget {
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.teal.withOpacity(0.1 * highlightAnimation.value),
+                                      color: Colors.teal.withOpacity(
+                                        0.1 * highlightAnimation.value,
+                                      ),
                                       blurRadius: 15,
                                       spreadRadius: 3,
                                     ),
@@ -146,10 +150,13 @@ class InteractiveSlide extends StatelessWidget {
                                     const SizedBox(width: 20),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            _getCompanyName(slide.bulletPoints[index]),
+                                            _getCompanyName(
+                                              slide.bulletPoints[index],
+                                            ),
                                             style: const TextStyle(
                                               fontSize: 22,
                                               fontWeight: FontWeight.bold,
@@ -158,7 +165,9 @@ class InteractiveSlide extends StatelessWidget {
                                           ),
                                           const SizedBox(height: 8),
                                           Text(
-                                            _getCompanyDescription(slide.bulletPoints[index]),
+                                            _getCompanyDescription(
+                                              slide.bulletPoints[index],
+                                            ),
                                             style: const TextStyle(
                                               fontSize: 18,
                                               color: Colors.white70,
@@ -206,6 +215,7 @@ class InteractiveSlide extends StatelessWidget {
     if (bulletPoint.contains('Toyota')) return 'Toyota';
     if (bulletPoint.contains('Alibaba')) return 'Alibaba';
     if (bulletPoint.contains('eBay')) return 'eBay Motors';
+    if (bulletPoint.contains('Headspace')) return 'Headspace';
     return 'Enterprise';
   }
 

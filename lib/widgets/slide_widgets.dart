@@ -7,6 +7,7 @@ export 'slides/future_slide.dart';
 export 'slides/partnership_slide.dart';
 export 'slides/interactive_slide.dart';
 export 'slides/conclusion_slide.dart';
+export 'slides/showcase_slide.dart';
 export 'slide_footnote.dart';
 export 'source_links_page.dart';
 export 'start_screen.dart';
