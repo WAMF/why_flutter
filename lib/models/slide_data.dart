@@ -20,6 +20,46 @@ class SlideData {
     this.sourceLinks,
     this.speakingNotes,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'subtitle': subtitle,
+      'bulletPoints': bulletPoints,
+      'statistics': statistics,
+      'caseStudies': caseStudies,
+      'type': type.toString().split('.').last,
+      'backgroundImage': backgroundImage,
+      'sourceLinks': sourceLinks?.map((link) => link.toJson()).toList(),
+      'speakingNotes': speakingNotes,
+    };
+  }
+
+  factory SlideData.fromJson(Map<String, dynamic> json) {
+    return SlideData(
+      title: json['title'] as String,
+      subtitle: json['subtitle'] as String,
+      bulletPoints: List<String>.from(json['bulletPoints'] as List),
+      statistics: json['statistics'] != null
+          ? Map<String, String>.from(json['statistics'] as Map)
+          : null,
+      caseStudies: json['caseStudies'] != null
+          ? List<String>.from(json['caseStudies'] as List)
+          : null,
+      type: SlideType.values.firstWhere(
+        (e) => e.toString().split('.').last == json['type'],
+      ),
+      backgroundImage: json['backgroundImage'] as String?,
+      sourceLinks: json['sourceLinks'] != null
+          ? (json['sourceLinks'] as List)
+              .map((link) => SourceLink.fromJson(link as Map<String, dynamic>))
+              .toList()
+          : null,
+      speakingNotes: json['speakingNotes'] != null
+          ? List<String>.from(json['speakingNotes'] as List)
+          : null,
+    );
+  }
 }
 
 class SourceLink {
@@ -32,6 +72,22 @@ class SourceLink {
     required this.url,
     required this.description,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'url': url,
+      'description': description,
+    };
+  }
+
+  factory SourceLink.fromJson(Map<String, dynamic> json) {
+    return SourceLink(
+      title: json['title'] as String,
+      url: json['url'] as String,
+      description: json['description'] as String,
+    );
+  }
 }
 
 enum SlideType {
@@ -44,6 +100,36 @@ enum SlideType {
   interactive,
   conclusion,
   showcase,
+}
+
+class Presentation {
+  final String name;
+  final List<SlideData> slides;
+  final DateTime lastModified;
+
+  Presentation({
+    required this.name,
+    required this.slides,
+    required this.lastModified,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'slides': slides.map((slide) => slide.toJson()).toList(),
+      'lastModified': lastModified.toIso8601String(),
+    };
+  }
+
+  factory Presentation.fromJson(Map<String, dynamic> json) {
+    return Presentation(
+      name: json['name'] as String,
+      slides: (json['slides'] as List)
+          .map((slide) => SlideData.fromJson(slide as Map<String, dynamic>))
+          .toList(),
+      lastModified: DateTime.parse(json['lastModified'] as String),
+    );
+  }
 }
 
 class PresentationData {

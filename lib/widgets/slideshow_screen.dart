@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import '../models/slide_data.dart';
 import 'slide_widgets.dart';
 
 class SlideshowScreen extends StatefulWidget {
-  const SlideshowScreen({super.key});
+  final Presentation? presentation;
+  
+  const SlideshowScreen({super.key, this.presentation});
 
   @override
   State<SlideshowScreen> createState() => _SlideshowScreenState();
@@ -16,11 +19,19 @@ class _SlideshowScreenState extends State<SlideshowScreen>
   late AnimationController _animationController;
   int _currentSlide = 0;
   bool _presentationStarted = false;
-  final List<SlideData> _slides = PresentationData.getSlides();
+  late List<SlideData> _slides;
 
   @override
   void initState() {
     super.initState();
+    
+    // Initialize with provided presentation or default
+    if (widget.presentation != null) {
+      _slides = widget.presentation!.slides;
+    } else {
+      _slides = PresentationData.getSlides();
+    }
+    
     _pageController = PageController();
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 300),
@@ -51,6 +62,9 @@ class _SlideshowScreenState extends State<SlideshowScreen>
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
+    } else {
+      // On last slide, navigate to home
+      context.go('/');
     }
   }
 
@@ -73,8 +87,17 @@ class _SlideshowScreenState extends State<SlideshowScreen>
 
   @override
   Widget build(BuildContext context) {
+    // Auto-start presentation since we're coming from home screen
     if (!_presentationStarted) {
-      return StartScreen(onStart: _startPresentation);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _startPresentation();
+      });
+      return const Scaffold(
+        backgroundColor: Colors.black,
+        body: Center(
+          child: CircularProgressIndicator(color: Colors.white),
+        ),
+      );
     }
 
     return Scaffold(
@@ -84,7 +107,10 @@ class _SlideshowScreenState extends State<SlideshowScreen>
         autofocus: true,
         onKeyEvent: (KeyEvent event) {
           if (event is KeyDownEvent) {
-            if (event.logicalKey == LogicalKeyboardKey.space ||
+            if (event.logicalKey == LogicalKeyboardKey.escape) {
+              // Return to home screen on escape key
+              context.go('/');
+            } else if (event.logicalKey == LogicalKeyboardKey.space ||
                 event.logicalKey == LogicalKeyboardKey.arrowRight) {
               _nextSlide();
             } else if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
