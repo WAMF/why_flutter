@@ -94,112 +94,161 @@ class _SlideshowScreenState extends State<SlideshowScreen>
         },
         child: Stack(
           children: [
-          PageView.builder(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                _currentSlide = index;
-              });
-              if (_presentationStarted) {
-                _animationController.reset();
-                _animationController.forward();
-              }
-            },
-            itemCount: _slides.length,
-            itemBuilder: (context, index) {
-              return Center(
-                child: AspectRatio(
-                  aspectRatio: 800 / 900, // 8:9 aspect ratio
-                  child: Container(
-                    constraints: const BoxConstraints(
-                      maxWidth: 800,
-                      maxHeight: 900,
+            PageView.builder(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentSlide = index;
+                });
+                if (_presentationStarted) {
+                  _animationController.reset();
+                  _animationController.forward();
+                }
+              },
+              itemCount: _slides.length,
+              itemBuilder: (context, index) {
+                return Center(
+                  child: AspectRatio(
+                    aspectRatio: 4 / 3, // 8:9 aspect ratio
+                    child: Container(
+                      constraints: const BoxConstraints(
+                        maxWidth: 800,
+                        maxHeight: 900,
+                      ),
+                      child: SlideBuilder.buildSlide(
+                        _slides[index],
+                        _animationController,
+                      ),
                     ),
-                    child: SlideBuilder.buildSlide(_slides[index], _animationController),
                   ),
-                ),
-              );
-            },
-          ),
-          Positioned(
-            bottom: 20,
-            left: 20,
-            right: 20,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: _currentSlide > 0 ? _previousSlide : null,
-                      icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      '${_currentSlide + 1} / ${_slides.length}',
-                      style: const TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                    const SizedBox(width: 10),
-                    IconButton(
-                      onPressed: _currentSlide < _slides.length - 1 ? _nextSlide : null,
-                      icon: const Icon(Icons.arrow_forward_ios, color: Colors.white),
-                    ),
-                    const SizedBox(width: 20),
-                    IconButton(
-                      onPressed: () => SlideNotesBottomSheet.show(context, _slides[_currentSlide]),
-                      icon: const Icon(Icons.speaker_notes, color: Colors.white),
-                      tooltip: 'Show speaker notes',
-                    ),
-                  ],
-                ),
-                Row(
-                  children: List.generate(
-                    _slides.length,
-                    (index) => GestureDetector(
-                      onTap: () => _goToSlide(index),
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 2),
-                        width: 8,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: index == _currentSlide
-                              ? Colors.white
-                              : Colors.white.withOpacity(0.3),
+                );
+              },
+            ),
+            Positioned(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: _currentSlide > 0 ? _previousSlide : null,
+                        icon: const Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        '${_currentSlide + 1} / ${_slides.length}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      IconButton(
+                        onPressed: _currentSlide < _slides.length - 1
+                            ? _nextSlide
+                            : null,
+                        icon: const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      IconButton(
+                        onPressed: () => SlideNotesBottomSheet.show(
+                          context,
+                          _slides[_currentSlide],
+                        ),
+                        icon: const Icon(
+                          Icons.speaker_notes,
+                          color: Colors.white,
+                        ),
+                        tooltip: 'Show speaker notes',
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: List.generate(
+                      _slides.length,
+                      (index) => GestureDetector(
+                        onTap: () => _goToSlide(index),
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 2),
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: index == _currentSlide
+                                ? Colors.white
+                                : Colors.white.withOpacity(0.3),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
     );
   }
 }
 
 class SlideBuilder {
-  static Widget buildSlide(SlideData slide, AnimationController animationController) {
+  static Widget buildSlide(
+    SlideData slide,
+    AnimationController animationController,
+  ) {
     switch (slide.type) {
       case SlideType.title:
-        return TitleSlide(slide: slide, animationController: animationController);
+        return TitleSlide(
+          slide: slide,
+          animationController: animationController,
+        );
       case SlideType.statistics:
-        return StatisticsSlide(slide: slide, animationController: animationController);
+        return StatisticsSlide(
+          slide: slide,
+          animationController: animationController,
+        );
       case SlideType.performance:
-        return PerformanceSlide(slide: slide, animationController: animationController);
+        return PerformanceSlide(
+          slide: slide,
+          animationController: animationController,
+        );
       case SlideType.roi:
         return ROISlide(slide: slide, animationController: animationController);
       case SlideType.future:
-        return FutureSlide(slide: slide, animationController: animationController);
+        return FutureSlide(
+          slide: slide,
+          animationController: animationController,
+        );
       case SlideType.partnership:
-        return PartnershipSlide(slide: slide, animationController: animationController);
+        return PartnershipSlide(
+          slide: slide,
+          animationController: animationController,
+        );
       case SlideType.interactive:
-        return InteractiveSlide(slide: slide, animationController: animationController);
+        return InteractiveSlide(
+          slide: slide,
+          animationController: animationController,
+        );
       case SlideType.conclusion:
-        return ConclusionSlide(slide: slide, animationController: animationController);
+        return ConclusionSlide(
+          slide: slide,
+          animationController: animationController,
+        );
+      case SlideType.showcase:
+        return ShowcaseSlide(
+          slide: slide,
+          animationController: animationController,
+        );
     }
   }
 }

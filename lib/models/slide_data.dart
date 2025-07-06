@@ -43,6 +43,7 @@ enum SlideType {
   partnership,
   interactive,
   conclusion,
+  showcase,
 }
 
 class PresentationData {
@@ -64,8 +65,8 @@ class PresentationData {
             description: "Official Flutter documentation and resources",
           ),
           SourceLink(
-            title: "Google I/O 2024 Flutter Updates",
-            url: "https://io.google/2024/explore/flutter/",
+            title: "Google I/O 2025 Flutter Updates",
+            url: "https://io.google/2025/explore/pa-keynote-12",
             description: "Latest Flutter announcements and roadmap",
           ),
         ],
@@ -124,6 +125,7 @@ class PresentationData {
         bulletPoints: [
           "BMW: Global deployment across 47 countries",
           "Alibaba Xianyu: 50M+ users, 50% faster development",
+          "Headspace: Mental wellness app with millions of daily users",
           "eBay Motors: 98.3% code sharing, 2x development speed",
           "Toyota: Mission-critical automotive systems",
         ],
@@ -140,6 +142,12 @@ class PresentationData {
             description: "Alibaba's 50M+ user Flutter implementation",
           ),
           SourceLink(
+            title: "Headspace Flutter Implementation",
+            url: "https://flutter.dev/showcase/headspace",
+            description:
+                "How Headspace built their meditation app with Flutter",
+          ),
+          SourceLink(
             title: "eBay Motors Technical Blog",
             url: "https://flutter.dev/showcase/ebay",
             description: "Technical deep dive into eBay's Flutter adoption",
@@ -149,6 +157,7 @@ class PresentationData {
           "These aren't small startups - these are global industry leaders proving Flutter works at enterprise scale.",
           "BMW deployed Flutter across 47 countries with a single codebase, managing their global automotive app ecosystem.",
           "Alibaba's Xianyu marketplace serves over 50 million users with 50% faster feature development cycles.",
+          "Headspace chose Flutter to deliver their mental wellness platform to millions of daily users across all platforms with consistent, beautiful animations.",
           "eBay Motors achieved 98.3% code sharing and doubled their development speed compared to native development.",
           "Toyota's adoption for automotive systems proves Flutter's reliability in mission-critical applications.",
         ],
@@ -195,6 +204,80 @@ class PresentationData {
         ],
       ),
       SlideData(
+        title: "Superior Developer Experience",
+        subtitle: "World-Class Tooling & Ecosystem",
+        bulletPoints: [
+          "Flutter CLI: Hot reload, debugging, and deployment in one tool",
+          "Dart compiler: Ahead-of-time compilation with tree shaking",
+          "pub.dev: 45k+ packages with quality scoring and verification",
+          "Package labels ensure vetted, maintained libraries rise to top",
+        ],
+        statistics: {
+          "Available Packages": "45k+",
+          "Quality Scoring": "Automated",
+          "Hot Reload": "<1 second",
+          "Quality SDKs": "Top providers",
+          "CLI Commands": "50+",
+        },
+        type: SlideType.performance,
+        sourceLinks: [
+          SourceLink(
+            title: "Flutter Command Line Tools",
+            url: "https://docs.flutter.dev/reference/flutter-cli",
+            description:
+                "Complete reference for Flutter CLI commands and tooling",
+          ),
+          SourceLink(
+            title: "pub.dev Package Repository",
+            url: "https://pub.dev",
+            description:
+                "Official Dart and Flutter package repository with quality metrics",
+          ),
+          SourceLink(
+            title: "Dart Compilation and Performance",
+            url: "https://dart.dev/tools/dart-compile",
+            description: "Technical overview of Dart's compilation advantages",
+          ),
+        ],
+        speakingNotes: [
+          "Flutter's developer experience is unmatched in the cross-platform space, starting with the comprehensive CLI tooling.",
+          "The Flutter CLI provides everything from hot reload in under 1 second to complete deployment pipelines, all integrated seamlessly.",
+          "Dart's ahead-of-time compilation with tree shaking eliminates unused code, resulting in smaller, faster apps.",
+          "The pub.dev ecosystem hosts over 45,000 packages with automated quality scoring and verification badges.",
+          "Package labels like 'Flutter Favorite' and 'Verified Publisher' ensure that high-quality, well-maintained libraries are easily discoverable and rise to the top of search results.",
+        ],
+      ),
+      SlideData(
+        title: "Quality Through Comprehensive Testing",
+        subtitle: "Flutter's Built-in Quality Assurance Excellence",
+        bulletPoints: [
+          "Three-tier testing: Unit, Widget, and Integration tests",
+          "Golden file testing for pixel-perfect UI validation",
+          "95%+ test coverage achievable with built-in tools",
+          "Automated CI/CD integration with comprehensive reporting",
+        ],
+        statistics: {
+          "Test Types": "3 tiers",
+          "Coverage Achievable": "95%+",
+          "CI/CD Integration": "Built-in",
+          "Testing Speed": "Milliseconds",
+        },
+        type: SlideType.performance,
+        sourceLinks: [
+          SourceLink(
+            title: "Flutter Testing Documentation",
+            url: "https://docs.flutter.dev/testing",
+            description: "Comprehensive guide to Flutter's testing framework",
+          ),
+        ],
+        speakingNotes: [
+          "Flutter's testing framework is one of its strongest quality assurance features, built into the core framework rather than added as an afterthought.",
+          "The three-tier testing approach covers unit tests for business logic, widget tests for UI components, and integration tests for complete user flows.",
+          "Teams regularly achieve 95%+ test coverage using Flutter's built-in tools, with tests running in milliseconds for rapid feedback cycles.",
+          "The framework integrates seamlessly with CI/CD pipelines, providing comprehensive test reporting and quality gates.",
+        ],
+      ),
+      SlideData(
         title: "Proven ROI & Business Impact",
         subtitle: "Real Numbers from Real Enterprise Implementations",
         bulletPoints: [
@@ -212,19 +295,19 @@ class PresentationData {
         type: SlideType.roi,
         sourceLinks: [
           SourceLink(
-            title: "Flutter ROI Calculator",
-            url: "https://flutter.dev/multi-platform",
-            description: "Calculate potential savings with Flutter development",
-          ),
-          SourceLink(
             title: "Enterprise Flutter Adoption Report",
             url: "https://flutter.dev/showcase",
             description: "Real-world enterprise Flutter success stories",
           ),
           SourceLink(
-            title: "Cross-Platform Development Cost Analysis",
-            url: "https://research.google.com/pubs/pub49571/",
-            description: "Academic study on cross-platform development ROI",
+            title: "Flutter in production",
+            url: "https://flutter.dev/events/flutter-in-production",
+            description: "Google I/O 2025 Flutter in production",
+          ),
+          SourceLink(
+            title: "CTO report",
+            url: "https://leancode.co/report/flutter-cto-report",
+            description: "CTO report on Flutter adoption and satisfaction",
           ),
         ],
         speakingNotes: [
@@ -239,7 +322,7 @@ class PresentationData {
         title: "Future-Ready Platform",
         subtitle: "AI Integration & Emerging Technologies",
         bulletPoints: [
-          "Native Gemini AI integration in <50 lines of code",
+          "Native AI integration in <50 lines of code",
           "WebAssembly support for high-performance web",
           "Desktop, mobile, web deployment from single codebase",
           "Continuously evolving with Google's innovation pipeline",
@@ -257,58 +340,34 @@ class PresentationData {
             description: "WebAssembly support in Flutter for web performance",
           ),
           SourceLink(
-            title: "Flutter Roadmap 2024-2025",
-            url: "https://github.com/flutter/flutter/wiki/Roadmap",
+            title: "Flutter Roadmap 2025",
+            url:
+                "https://github.com/flutter/flutter/blob/master/docs/roadmap/Roadmap.md",
             description:
                 "Official Flutter development roadmap and future plans",
           ),
-        ],
-      ),
-      SlideData(
-        title: "Why We Are Mobile First + Flutter",
-        subtitle: "Your Strategic Partnership for Success",
-        bulletPoints: [
-          "20+ years mobile development experience",
-          "Full-stack Flutter implementation expertise",
-          "Enterprise-grade deployment experience",
-          "Proven track record with performance-critical apps",
-        ],
-        type: SlideType.partnership,
-        sourceLinks: [
           SourceLink(
-            title: "Mobile First Company Profile",
-            url: "https://wearemobilefirst.com",
-            description:
-                "Learn more about Mobile First's expertise and services",
-          ),
-          SourceLink(
-            title: "Flutter Consulting Best Practices",
-            url: "https://flutter.dev/consulting",
-            description:
-                "Guidelines for successful Flutter consulting partnerships",
-          ),
-          SourceLink(
-            title: "Enterprise Flutter Implementation Guide",
-            url: "https://docs.flutter.dev/deployment",
-            description: "Best practices for enterprise Flutter deployments",
+            title: "New Flutter Features",
+            url:
+                "https://medium.com/flutter/dart-flutter-momentum-at-google-i-o-2025-4863aa4f84a4",
+            description: "BLog post on Flutter features and updates",
           ),
         ],
       ),
       SlideData(
         title: "The Strategic Decision",
-        subtitle: "Flutter = Competitive Advantage",
+        subtitle: "Flutter = Complete Development Excellence",
         bulletPoints: [
-          "Short-term: 2-3x faster development, 30-50% cost savings",
-          "Medium-term: Easier maintenance, unified team structure",
-          "Long-term: Platform expansion, AI integration capabilities",
-          "95.7% of CTOs would choose Flutter again",
+          "Superior DX: World-class tooling, 45k+ vetted packages, <1s hot reload",
+          "Quality Assurance: Built-in 3-tier testing, 95%+ coverage achievable",
+          "Performance & ROI: 2-3x faster development, 30-50% cost savings",
+          "Future-Ready: AI integration, multi-platform deployment, proven at scale",
         ],
         type: SlideType.conclusion,
         sourceLinks: [
           SourceLink(
             title: "CTO Survey: Flutter Satisfaction",
-            url:
-                "https://survey.stackoverflow.co/2024/#section-most-loved-dreaded-and-wanted-other-frameworks-and-libraries",
+            url: "https://leancode.co/report/flutter-cto-report",
             description: "Industry survey on Flutter adoption and satisfaction",
           ),
           SourceLink(
@@ -323,11 +382,51 @@ class PresentationData {
           ),
         ],
         speakingNotes: [
-          "Let me summarize why Flutter is the strategic choice that gives you a competitive advantage.",
-          "Short-term benefits are immediate: 2-3x faster development and 30-50% cost savings start from day one.",
-          "Medium-term, you'll see easier maintenance and can structure your team around one technology stack instead of multiple.",
-          "Long-term, Flutter positions you for platform expansion and emerging technologies like AI integration.",
-          "The proof is in the satisfaction: 95.7% of CTOs who chose Flutter would make the same decision again. That's unprecedented confidence in a technology choice.",
+          "Flutter delivers complete development excellence across every dimension that matters to your business.",
+          "Developer experience is unmatched: world-class CLI tooling, 45,000+ quality-verified packages, and hot reload in under 1 second.",
+          "Quality is built-in, not bolted-on: comprehensive 3-tier testing framework with 95%+ coverage achievable out of the box.",
+          "The business case is compelling: 2-3x faster development cycles and 30-50% cost savings from day one.",
+          "You're future-proofed: AI integration capabilities, true multi-platform deployment, and proven success at enterprise scale.",
+          "This isn't just a technology choice - it's a strategic advantage that 95.7% of CTOs would choose again.",
+        ],
+      ),
+      SlideData(
+        title: "Explore More Success Stories",
+        subtitle: "Discover How Companies Around the World Use Flutter",
+        bulletPoints: [
+          "See real-world implementations from industry leaders",
+          "Explore case studies and technical deep-dives",
+          "Learn from companies who've scaled Flutter globally",
+          "Get inspired by innovative Flutter applications",
+          "! This presentation was created using Flutter !",
+        ],
+        type: SlideType.showcase,
+        sourceLinks: [
+          SourceLink(
+            title: "Flutter Showcase",
+            url: "https://flutter.dev/showcase",
+            description:
+                "Official Flutter showcase featuring success stories from companies worldwide",
+          ),
+          SourceLink(
+            title: "Flutter Case Studies",
+            url: "https://flutter.dev/showcase#case-studies",
+            description:
+                "In-depth case studies showing how companies built their Flutter apps",
+          ),
+          SourceLink(
+            title: "Flutter Customer Stories",
+            url: "https://flutter.dev/showcase#customer-stories",
+            description:
+                "Direct testimonials and stories from Flutter customers",
+          ),
+        ],
+        speakingNotes: [
+          "Before we wrap up, I want to leave you with resources to explore further.",
+          "The Flutter showcase website features hundreds of real-world success stories from companies just like yours.",
+          "You'll find detailed case studies showing exactly how companies implemented Flutter and what results they achieved.",
+          "From startups to Fortune 500 companies, these stories prove that Flutter works at any scale.",
+          "Visit flutter.dev/showcase to see what's possible when you choose Flutter for your next project.",
         ],
       ),
     ];
