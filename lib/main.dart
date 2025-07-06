@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
+import 'package:kiss_dependencies/kiss_dependencies.dart';
 import 'dart:convert';
 import 'screens/home_screen.dart';
 import 'widgets/slideshow_screen.dart';
 import 'models/slide_data.dart';
 import 'services/presentation_service.dart';
+import 'dependencies.dart';
 
 void main() {
+  setupDependencies();
   runApp(FlutterSlideshowApp());
 }
 
@@ -30,7 +33,7 @@ class FlutterSlideshowApp extends StatelessWidget {
           }
           // If no presentation is provided, load the default
           return FutureBuilder<Presentation>(
-            future: PresentationService.createDefaultPresentation(),
+            future: resolve<PresentationService>().createDefaultPresentation(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return PresentationScreen(presentation: snapshot.data!);

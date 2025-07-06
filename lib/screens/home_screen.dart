@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:desktop_drop/desktop_drop.dart';
+import 'package:kiss_dependencies/kiss_dependencies.dart';
 import '../models/slide_data.dart';
 import '../services/presentation_service.dart';
 
@@ -17,6 +18,13 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _dragging = false;
   bool _loading = false;
   String? _errorMessage;
+  late final PresentationService _presentationService;
+
+  @override
+  void initState() {
+    super.initState();
+    _presentationService = resolve<PresentationService>();
+  }
 
   Future<void> _loadPresentationFromFile() async {
     setState(() {
@@ -25,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     try {
-      final presentation = await PresentationService.loadPresentation();
+      final presentation = await _presentationService.loadPresentation();
       if (presentation != null && mounted) {
         context.go('/presentation', extra: presentation);
       }
@@ -41,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _loadDefaultPresentation() async {
-    final presentation = await PresentationService.createDefaultPresentation();
+    final presentation = await _presentationService.createDefaultPresentation();
     if (mounted) {
       context.go('/presentation', extra: presentation);
     }

@@ -4,22 +4,32 @@ import 'package:flutter/foundation.dart';
 import 'package:file_picker/file_picker.dart';
 import '../models/slide_data.dart';
 
-class PresentationService {
-  static Future<void> savePresentation(Presentation presentation) async {
+abstract class PresentationService {
+  Future<void> savePresentation(Presentation presentation);
+  Future<Presentation?> loadPresentation();
+  Future<List<String>> getAvailablePresentations();
+  Future<Presentation> createDefaultPresentation();
+}
+
+class PresentationServiceImpl implements PresentationService {
+  @override
+  Future<void> savePresentation(Presentation presentation) async {
     await _saveWithPicker(presentation);
   }
 
-  static Future<Presentation?> loadPresentation() async {
+  @override
+  Future<Presentation?> loadPresentation() async {
     return await _loadWithPicker();
   }
 
-  static Future<List<String>> getAvailablePresentations() async {
+  @override
+  Future<List<String>> getAvailablePresentations() async {
     // No longer maintaining a list of available presentations
     // Users will use file picker to select presentations
     return [];
   }
 
-  static Future<void> _saveWithPicker(Presentation presentation) async {
+  Future<void> _saveWithPicker(Presentation presentation) async {
     try {
       final json = const JsonEncoder.withIndent(
         '  ',
@@ -38,7 +48,8 @@ class PresentationService {
     }
   }
 
-  static Future<Presentation> createDefaultPresentation() async {
+  @override
+  Future<Presentation> createDefaultPresentation() async {
     return Presentation(
       name: 'Why Flutter',
       slides: PresentationData.getSlides(),
@@ -46,7 +57,7 @@ class PresentationService {
     );
   }
 
-  static Future<Presentation?> _loadWithPicker() async {
+  Future<Presentation?> _loadWithPicker() async {
     try {
       final result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
