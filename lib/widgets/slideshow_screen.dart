@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import '../models/slide_data.dart';
+import '../services/presentation_service.dart';
 import 'slide_widgets.dart';
 
 class SlideshowScreen extends StatefulWidget {
-  const SlideshowScreen({super.key});
+  final Presentation? presentation;
+  
+  const SlideshowScreen({super.key, this.presentation});
 
   @override
   State<SlideshowScreen> createState() => _SlideshowScreenState();
@@ -16,11 +20,22 @@ class _SlideshowScreenState extends State<SlideshowScreen>
   late AnimationController _animationController;
   int _currentSlide = 0;
   bool _presentationStarted = false;
-  final List<SlideData> _slides = PresentationData.getSlides();
+  late List<SlideData> _slides;
+  late String _presentationName;
 
   @override
   void initState() {
     super.initState();
+    
+    // Initialize with provided presentation or default
+    if (widget.presentation != null) {
+      _slides = widget.presentation!.slides;
+      _presentationName = widget.presentation!.name;
+    } else {
+      _slides = PresentationData.getSlides();
+      _presentationName = 'Why Flutter';
+    }
+    
     _pageController = PageController();
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 300),
@@ -51,6 +66,9 @@ class _SlideshowScreenState extends State<SlideshowScreen>
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
+    } else {
+      // On last slide, navigate to home
+      context.go('/');
     }
   }
 
@@ -73,8 +91,17 @@ class _SlideshowScreenState extends State<SlideshowScreen>
 
   @override
   Widget build(BuildContext context) {
+    // Auto-start presentation since we're coming from home screen
     if (!_presentationStarted) {
-      return StartScreen(onStart: _startPresentation);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _startPresentation();
+      });
+      return const Scaffold(
+        backgroundColor: Colors.black,
+        body: Center(
+          child: CircularProgressIndicator(color: Colors.white),
+        ),
+      );
     }
 
     return Scaffold(
@@ -84,7 +111,10 @@ class _SlideshowScreenState extends State<SlideshowScreen>
         autofocus: true,
         onKeyEvent: (KeyEvent event) {
           if (event is KeyDownEvent) {
-            if (event.logicalKey == LogicalKeyboardKey.space ||
+            if (event.logicalKey == LogicalKeyboardKey.escape) {
+              // Return to home screen on escape key
+              context.go('/');
+            } else if (event.logicalKey == LogicalKeyboardKey.space ||
                 event.logicalKey == LogicalKeyboardKey.arrowRight) {
               _nextSlide();
             } else if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
@@ -150,6 +180,55 @@ class _SlideshowScreenState extends State<SlideshowScreen>
                       icon: const Icon(Icons.speaker_notes, color: Colors.white),
                       tooltip: 'Show speaker notes',
                     ),
+                    const SizedBox(width: 10),
+                    PopupMenuButton<String>(
+                      icon: const Icon(Icons.more_vert, color: Colors.white),
+                      onSelected: (value) {
+                        switch (value) {
+                          case 'save':
+                            _savePresentation();
+                            break;
+                          case 'load':
+                            _loadPresentation();
+                            break;
+                          case 'new':
+                            _newPresentation();
+                            break;
+                        }
+                      },
+                      itemBuilder: (BuildContext context) => [
+                        const PopupMenuItem(
+                          value: 'save',
+                          child: Row(
+                            children: [
+                              Icon(Icons.save),
+                              SizedBox(width: 8),
+                              Text('Save Presentation'),
+                            ],
+                          ),
+                        ),
+                        const PopupMenuItem(
+                          value: 'load',
+                          child: Row(
+                            children: [
+                              Icon(Icons.folder_open),
+                              SizedBox(width: 8),
+                              Text('Load Presentation'),
+                            ],
+                          ),
+                        ),
+                        const PopupMenuItem(
+                          value: 'new',
+                          child: Row(
+                            children: [
+                              Icon(Icons.add),
+                              SizedBox(width: 8),
+                              Text('New Presentation'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
                 Row(
@@ -178,6 +257,113 @@ class _SlideshowScreenState extends State<SlideshowScreen>
       ),
     ),
     );
+  }
+  
+  Future<void> _savePresentation() async {
+    final nameController = TextEditingController(text: _presentationName);
+    final result = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Save Presentation'),
+          content: TextField(
+            controller: nameController,
+            decoration: const InputDecoration(
+              labelText: 'Presentation Name',
+              hintText: 'Enter presentation name',
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(nameController.text),
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+    
+    if (result != null && result.isNotEmpty) {
+      final presentation = Presentation(
+        name: result,
+        slides: _slides,
+        lastModified: DateTime.now(),
+      );
+      
+      await PresentationService.savePresentation(presentation);
+      setState(() {
+        _presentationName = result;
+      });
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Presentation "$result" saved successfully')),
+        );
+      }
+    }
+  }
+  
+  Future<void> _loadPresentation() async {
+    final presentation = await PresentationService.loadPresentation();
+    
+    if (presentation != null) {
+      setState(() {
+        _slides = presentation.slides;
+        _presentationName = presentation.name;
+        _currentSlide = 0;
+      });
+      
+      _pageController.jumpToPage(0);
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Loaded "${presentation.name}"')),
+        );
+      }
+    }
+  }
+  
+  Future<void> _newPresentation() async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('New Presentation'),
+          content: const Text('Create a new empty presentation? Current changes will be lost.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Create New'),
+            ),
+          ],
+        );
+      },
+    );
+    
+    if (confirm == true) {
+      setState(() {
+        _slides = [
+          SlideData(
+            title: 'New Presentation',
+            subtitle: 'Add your content here',
+            bulletPoints: ['Point 1', 'Point 2', 'Point 3'],
+            type: SlideType.title,
+          ),
+        ];
+        _presentationName = 'New Presentation';
+        _currentSlide = 0;
+      });
+      
+      _pageController.jumpToPage(0);
+    }
   }
 }
 
