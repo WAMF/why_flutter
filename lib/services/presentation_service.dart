@@ -4,25 +4,15 @@ import 'package:flutter/foundation.dart';
 import 'package:file_picker/file_picker.dart';
 import '../models/slide_data.dart';
 
-abstract class PresentationService {
-  Future<void> savePresentation(Presentation presentation);
-  Future<Presentation?> loadPresentation();
-  Future<List<String>> getAvailablePresentations();
-  Future<Presentation> createDefaultPresentation();
-}
-
-class PresentationServiceImpl implements PresentationService {
-  @override
+class PresentationService {
   Future<void> savePresentation(Presentation presentation) async {
     await _saveWithPicker(presentation);
   }
 
-  @override
   Future<Presentation?> loadPresentation() async {
     return await _loadWithPicker();
   }
 
-  @override
   Future<List<String>> getAvailablePresentations() async {
     // No longer maintaining a list of available presentations
     // Users will use file picker to select presentations
@@ -48,7 +38,6 @@ class PresentationServiceImpl implements PresentationService {
     }
   }
 
-  @override
   Future<Presentation> createDefaultPresentation() async {
     return Presentation(
       name: 'Why Flutter',
